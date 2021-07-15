@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Title, Form, Repos } from './style';
 import logo from '../../assets/logo.svg';
 import { FiChevronRight } from 'react-icons/fi';
+import { api } from '../../services/api';
+
+interface GithubReposiroty {
+  full_name: string;
+  description: string;
+  owner: {
+    login: string;
+    avatar_url: string;
+  };
+}
 
 export const Dasboard: React.FC = () => {
+  const [repos, setRepos] = useState<GithubReposiroty[]>([]);
+
   return (
     <>
       <img src={logo} alt="Logo da aplicação" />
@@ -21,7 +33,7 @@ export const Dasboard: React.FC = () => {
             alt="Repositorio"
           />
           <div>
-            <strong>yurialvesbrasil/mini-curso</strong>
+            <strong>yurialvesbrasil/flutter_duolingo</strong>
             <p>Descrição completa do repositório</p>
           </div>
           <FiChevronRight size={20} />
