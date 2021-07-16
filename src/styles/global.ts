@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-
 import { createGlobalStyle } from 'styled-components';
 import imgBackground from '../assets/background.svg';
 

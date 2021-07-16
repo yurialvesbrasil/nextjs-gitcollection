@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { Title, Form, Repos, Error } from './style';
 import logo from '../../assets/logo.svg';
@@ -8,7 +7,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 interface GithubReposiroty {
-  node_id: string,
+  node_id: string;
   full_name: string;
   description: string;
   owner: {
@@ -22,7 +21,7 @@ export const Dasboard: React.FC = () => {
   const [repos, setRepos] = useState<GithubReposiroty[]>(() => {
     /* Recupera dados do localStorage caso exista*/
     const storangeRepos = localStorage.getItem('@GitCollection:repositories');
-    if(storangeRepos) {
+    if (storangeRepos) {
       return JSON.parse(storangeRepos);
     }
     return [];
@@ -38,15 +37,17 @@ export const Dasboard: React.FC = () => {
   }, [repos]);
 
   /* Evento para armazenar valor do input */
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>): void{
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>): void {
     setNewRepo(event.target.value);
     setInputError('');
   }
 
-  async function handleAddRepo(event: FormEvent<HTMLFormElement>): Promise<void>{
+  async function handleAddRepo(
+    event: FormEvent<HTMLFormElement>,
+  ): Promise<void> {
     event.preventDefault();
 
-    if(!newRepo){
+    if (!newRepo) {
       setInputError('Informe o username/repositório');
       return;
     }
@@ -63,13 +64,19 @@ export const Dasboard: React.FC = () => {
       <Title>Catálogo de Repositórios do Github</Title>
 
       <Form hasError={Boolean(inputError)} onSubmit={handleAddRepo}>
-        <input placeholder="username/repository_name" onChange={handleInputChange} />
+        <input
+          placeholder="username/repository_name"
+          onChange={handleInputChange}
+        />
         <button type="submit">Buscar</button>
       </Form>
       {inputError && <Error>{inputError}</Error>}
       <Repos>
         {repos.map(repository => (
-            <Link to={`/repositories/${repository.full_name}`} key={repository.node_id}>
+          <Link
+            to={`/repositories/${repository.full_name}`}
+            key={repository.node_id}
+          >
             <img
               src={repository.owner.avatar_url}
               alt={repository.owner.login}
@@ -79,7 +86,7 @@ export const Dasboard: React.FC = () => {
               <p>{repository.description}</p>
             </div>
             <FiChevronRight size={20} />
-          </Link>          
+          </Link>
         ))}
       </Repos>
     </>
