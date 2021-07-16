@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 import { shade } from 'polished'; //Biblioteca para dar efeitos em cores
 

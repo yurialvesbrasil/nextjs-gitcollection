@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 import { createGlobalStyle } from 'styled-components';
 import imgBackground from '../assets/background.svg';
 
@@ -8,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  // eslint-disable-next-line prettier/prettier
   html {
     @media (max-width: 1080px){
         fonte-size: 93.75%
