@@ -5,6 +5,7 @@ import logo from '../../assets/logo.svg';
 import { FiChevronRight } from 'react-icons/fi';
 import { api } from '../../services/api';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 interface GithubReposiroty {
   node_id: string,
@@ -68,7 +69,7 @@ export const Dasboard: React.FC = () => {
       {inputError && <Error>{inputError}</Error>}
       <Repos>
         {repos.map(repository => (
-            <a href="/repositories" key={repository.node_id}>
+            <Link to={`/repositories/${repository.full_name}`} key={repository.node_id}>
             <img
               src={repository.owner.avatar_url}
               alt={repository.owner.login}
@@ -78,7 +79,7 @@ export const Dasboard: React.FC = () => {
               <p>{repository.description}</p>
             </div>
             <FiChevronRight size={20} />
-          </a>          
+          </Link>          
         ))}
       </Repos>
     </>
