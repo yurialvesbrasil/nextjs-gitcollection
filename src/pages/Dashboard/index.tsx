@@ -4,6 +4,7 @@ import { Title, Form, Repos, Error } from './style';
 import logo from '../../assets/logo.svg';
 import { FiChevronRight } from 'react-icons/fi';
 import { api } from '../../services/api';
+import { useEffect } from 'react';
 
 interface GithubReposiroty {
   node_id: string,
@@ -17,11 +18,23 @@ interface GithubReposiroty {
 
 export const Dasboard: React.FC = () => {
   /* Armazena a lista de repositórios */
-  const [repos, setRepos] = useState<GithubReposiroty[]>([]);
+  const [repos, setRepos] = useState<GithubReposiroty[]>(() => {
+    /* Recupera dados do localStorage caso exista*/
+    const storangeRepos = localStorage.getItem('@GitCollection:repositories');
+    if(storangeRepos) {
+      return JSON.parse(storangeRepos);
+    }
+    return [];
+  });
   /* Armazena valor que está no input */
   const [newRepo, setNewRepo] = useState('');
   /* Armazena mensagem de erro */
   const [inputError, setInputError] = useState('');
+
+  /* Toda vez que repos for modificado ele é armazenado no localStorange*/
+  useEffect(() => {
+    localStorage.setItem('@GitCollection:repositories', JSON.stringify(repos));
+  }, [repos]);
 
   /* Evento para armazenar valor do input */
   function handleInputChange(event: ChangeEvent<HTMLInputElement>): void{
