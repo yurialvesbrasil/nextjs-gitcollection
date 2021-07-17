@@ -87,9 +87,9 @@ export const Issues = styled.div`
     display: flex;
     text-decoration: none;
     align-items: center;
-    transition: transform 0.2s;
+    transition: transform 0.2s !important;
 
-    &:houver {
+    &:hover {
       transform: translateX(6px);
     }
 

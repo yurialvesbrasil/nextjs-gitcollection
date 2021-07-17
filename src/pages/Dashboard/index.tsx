@@ -3,7 +3,7 @@ import { Title, Form, Repos, Error } from './style';
 import logo from '../../assets/logo.svg';
 import { FiChevronRight } from 'react-icons/fi';
 import { api } from '../../services/api';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 interface GithubReposiroty {
@@ -30,6 +30,8 @@ export const Dasboard: React.FC = () => {
   const [newRepo, setNewRepo] = useState('');
   /* Armazena mensagem de erro */
   const [inputError, setInputError] = useState('');
+  /* Cria referencia para limpar formulário */
+  const formEl = useRef<HTMLFormElement | null>(null);
 
   /* Toda vez que repos for modificado ele é armazenado no localStorange*/
   useEffect(() => {
@@ -52,10 +54,26 @@ export const Dasboard: React.FC = () => {
       return;
     }
 
-    const response = await api.get<GithubReposiroty>(`repos/${newRepo}`);
-    const repository = response.data;
-    setRepos([...repos, repository]);
-    setNewRepo('');
+    try {
+      //Verifica se já existe na lista local
+      const found = repos.find(element => element.full_name === newRepo);
+      if (found) {
+        setInputError('Este username/repositório já existe em sua lista');
+        return;
+      }
+
+      const response = await api.get<GithubReposiroty>(`repos/${newRepo}`);
+
+      const repository = response.data;
+
+      setRepos([...repos, repository]);
+      formEl.current?.reset();
+      setNewRepo('');
+      setInputError('');
+    } catch {
+      setInputError('Informe o username/repositório existente no GitHub');
+      return;
+    }
   }
 
   return (
@@ -63,7 +81,11 @@ export const Dasboard: React.FC = () => {
       <img src={logo} alt="Logo da aplicação" />
       <Title>Catálogo de Repositórios do Github</Title>
 
-      <Form hasError={Boolean(inputError)} onSubmit={handleAddRepo}>
+      <Form
+        ref={formEl}
+        hasError={Boolean(inputError)}
+        onSubmit={handleAddRepo}
+      >
         <input
           placeholder="username/repository_name"
           onChange={handleInputChange}
