@@ -75,7 +75,10 @@ export const RepoInfo = styled.section`
 `;
 
 export const Issues = styled.div`
+  display: flex;
+  flex-direction: column;
   margin-top: 80px;
+  gap: 16px;
   a {
     background: #fff;
     border-radius: 5px;
@@ -84,7 +87,6 @@ export const Issues = styled.div`
     display: flex;
     text-decoration: none;
     align-items: center;
-    gap: 16px;
     transition: transform 0.2s;
 
     &:houver {
@@ -97,7 +99,7 @@ export const Issues = styled.div`
 
       strong {
         font-size: 20px;
-        color: #3d3d4d;
+        color: #585860;
       }
       p {
         font-size: 18px;
