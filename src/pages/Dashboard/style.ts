@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import styled, { css } from 'styled-components';
 import { shade } from 'polished'; //Biblioteca para dar efeitos em cores
 
@@ -29,9 +28,11 @@ export const Form = styled.form<FormProps>`
     color: #3a3a3a;
     border-right: 0;
 
-    ${(props) => props.hasError && css`
-      border-color: #c53030;
-    ` }
+    ${props =>
+      props.hasError &&
+      css`
+        border-color: #c53030;
+      `}
 
     &::placeholder {
       color: #a8a8b3;
@@ -56,6 +57,41 @@ export const Form = styled.form<FormProps>`
 export const Repos = styled.div`
   margin-top: 80px;
   max-width: 700px;
+
+  .delete-icon {
+    margin-top: 10px;
+  }
+
+  .button-delete {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    gap: 4px;
+    align-content: flex-center;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    color: #3d3d4d;
+
+    div {
+      display: flex;
+      align-items: flex-start;
+      border: #a8a8b3 solid 1px;
+      border-radius: 8px;
+      padding: 4px;
+      transition: 0.2s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #fff;
+      }
+
+      span {
+        margin-top: 2px;
+        height: 100%;
+        font-size: 0.9rem;
+      }
+    }
+  }
 
   a {
     background: #fff;
