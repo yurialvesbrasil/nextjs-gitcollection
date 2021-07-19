@@ -36,6 +36,8 @@ export const Dasboard: React.FC = () => {
   const formEl = useRef<HTMLFormElement | null>(null);
   /* Controla modal de confirmação de remoção*/
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  /* Aponta para repositorio a ser deletado*/
+  const [repoToDelete, setDeleteRepo] = useState('');
 
   /* Toda vez que repos for modificado ele é armazenado no localStorange*/
   useEffect(() => {
@@ -48,7 +50,8 @@ export const Dasboard: React.FC = () => {
     setInputError('');
   }
 
-  function handleOpenModal() {
+  function handleOpenModal(nodeId: string) {
+    setDeleteRepo(nodeId);
     setIsOpen(true);
   }
 
@@ -62,7 +65,10 @@ export const Dasboard: React.FC = () => {
   }
 
   async function handleDeleteRepo() {
-    ///Remove item aqui
+    const novaListaDeRepositorio = repos.filter(
+      item => item.node_id !== repoToDelete,
+    );
+    setRepos(novaListaDeRepositorio);
   }
 
   async function handleAddRepo(
@@ -122,7 +128,10 @@ export const Dasboard: React.FC = () => {
       <Repos>
         {repos.map(repository => (
           <>
-            <div className="button-delete" onClick={() => handleOpenModal()}>
+            <div
+              className="button-delete"
+              onClick={() => handleOpenModal(repository.node_id)}
+            >
               <div>
                 <AiFillDelete size={18} />
                 <span>Delete</span>
