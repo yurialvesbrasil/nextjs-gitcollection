@@ -12,6 +12,10 @@
   <img alt="Podcastr" src=".github/telaInicial.png" width="100%">
 </p>
 
+## ✨ Demonstração
+
+- [Preview](https://yurigit.netlify.app/)
+
 ## ✨ Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
