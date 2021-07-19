@@ -18,7 +18,7 @@ interface GithubReposiroty {
   };
 }
 
-export const Dasboard: React.FC = () => {
+const Dasboard: React.FC = () => {
   /* Armazena a lista de repositórios */
   const [repos, setRepos] = useState<GithubReposiroty[]>(() => {
     /* Recupera dados do localStorage caso exista*/
@@ -157,3 +157,5 @@ export const Dasboard: React.FC = () => {
     </>
   );
 };
+
+export default Dasboard;

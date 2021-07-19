@@ -29,7 +29,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "analyzer": "yarn build && npx cra-bundle-analyzer"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +55,7 @@
     "@types/react-modal": "^3.12.1",
     "@types/react-router-dom": "^5.1.8",
     "@types/styled-components": "^5.1.11",
+    "cra-bundle-analyzer": "^0.1.0",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
